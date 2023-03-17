@@ -1,5 +1,4 @@
 from django import forms
-from django.core.exceptions import ValidationError
 from django.core.validators import BaseValidator
 
 from .models import Task
@@ -21,12 +20,13 @@ class TaskForm(forms.ModelForm):
 
     class Meta:
         model = Task
-        fields = ['summary', 'description', 'type', 'status']
+        fields = ['summary', 'description', 'type', 'status', 'project']
         labels = {
             'summary': 'Заголовок',
             'description': 'Описание',
             'status': 'Статус',
-            'type': 'Тип задачи'
+            'type': 'Тип задачи',
+            'project': 'Проект'
 
         }
 

@@ -1,9 +1,6 @@
-from datetime import datetime
-
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
-from django.views import View
-from django.views.generic import TemplateView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import DetailView, CreateView, UpdateView, DeleteView
 from webapp.models import Task
 from webapp.forms import TaskForm
 
