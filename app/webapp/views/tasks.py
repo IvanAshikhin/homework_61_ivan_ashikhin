@@ -23,12 +23,22 @@ class TaskUpdateView(UpdateView):
     def get_success_url(self):
         return reverse('detail_task', kwargs={'pk': self.object.pk})
 
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect('login')
+        return super().dispatch(request, *args, *kwargs)
+
 
 class TaskDeleteView(DeleteView):
     template_name = 'delete.html'
     context_object_name = 'tasks'
     model = Task
     success_url = reverse_lazy('index_page')
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect('login')
+        return super().dispatch(request, *args, *kwargs)
 
 
 class TaskAddView(CreateView):
@@ -39,3 +49,8 @@ class TaskAddView(CreateView):
 
     def get_success_url(self):
         return reverse('detail_task', kwargs={'pk': self.object.pk})
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect('login')
+        return super().dispatch(request, *args, *kwargs)

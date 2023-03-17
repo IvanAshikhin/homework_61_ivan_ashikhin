@@ -36,6 +36,11 @@ class AddProjectView(CreateView):
     def get_success_url(self):
         return reverse('project_detail', kwargs={'pk': self.object.pk})
 
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect('login')
+        return super().dispatch(request, *args, *kwargs)
+
 
 class ProjectTaskAddView(CreateView):
     template_name = 'add_task_project.html'
@@ -47,6 +52,11 @@ class ProjectTaskAddView(CreateView):
         context = super().get_context_data(**kwargs)
         context['project'] = get_object_or_404(Project, pk=self.kwargs.get('pk'))
         return context
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect('login')
+        return super().dispatch(request, *args, *kwargs)
 
     def form_valid(self, form):
         project_id = self.kwargs.get('pk')
