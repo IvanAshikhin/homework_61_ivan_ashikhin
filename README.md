@@ -1,1 +1,1 @@
-login:password admin:admin
+login:root admin:admin
